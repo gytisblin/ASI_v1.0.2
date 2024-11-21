@@ -70,8 +70,6 @@ MappedIndex = find(~ElData); %linear indices of zero elevation pixels
 % snapazel2 = dazel_list(29,snaptime)
 % snapazel3 = dazel_list(31,snaptime)
 
-
-%this represents the negative magnetic field line
 bf_azel = [205.7 77.5];
 
 % anglesnap1 = btwazel(bf_azel,snapazel1)
@@ -182,8 +180,8 @@ end
 function [layer] = ratio2layer(ratio)
 % IN/OUT: nx1 vector
 layer=strings(length(ratio),1);
-layer(find(ratio>1.35))="F";
-layer(find(ratio<=1.35))="E";
+layer(find(ratio>0.5))="F";
+layer(find(ratio<=0.5))="E";
 layer(find(ratio<0.06))="D";
 end
 
@@ -208,7 +206,6 @@ xyz2 = [xcart ycart zcart]';
 % [xyz2(1) xyz2(2) xyz2(3)] = sph2cart(azel2(1),azel2(2),1);
 % xyz1
 % xyz2
-dt=dot(xyz1,xyz2)
 anglebtw = acosd(dot(xyz1,xyz2) ./ (vecnorm(xyz1).*vecnorm(xyz2))); %1xn
 anglebtw = anglebtw'; %nx1
 end
